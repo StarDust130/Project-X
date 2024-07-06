@@ -16,7 +16,7 @@ import { registerPatient } from "@/lib/actions/patient.action";
 import SubmitButton from "../elements/SubmitButton";
 import { FileUploader } from "../elements/FileUploader";
 import CustomFormField from "./CustomFormField";
-import { FormFieldType } from "./PatientForm";
+import { FormFieldType } from "./CustomFormField";
 import {
   Doctors,
   GenderOptions,
@@ -140,7 +140,7 @@ const RegisterForm = ({ user }: { user: User }) => {
               control={form.control}
               name="phone"
               label="Phone Number"
-              placeholder="(555) 123-4567"
+              placeholder="XXX XXXX XXX"
             />
           </div>
 

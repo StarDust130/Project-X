@@ -44,7 +44,7 @@ interface CustomProps {
   showTimeSelect?: boolean;
   children?: React.ReactNode;
   renderSkeleton?: (field: any) => React.ReactNode;
-  fieldType: FormFieldType;
+  fieldType?: FormFieldType;
 }
 
 const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
@@ -85,7 +85,7 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
       return (
         <FormControl>
           <PhoneInput
-            defaultCountry="US"
+            defaultCountry="IN"
             placeholder={props.placeholder}
             international
             withCountryCallingCode
