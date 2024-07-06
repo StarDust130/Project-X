@@ -21,6 +21,7 @@ export enum FormFieldType {
   DATE_PICKER = "datePicker",
   SELECT = "select",
   SKELETON = "skeleton",
+  PHONE_INPUT = "phoneInput",
 }
 
 const PatientForm = () => {
@@ -49,7 +50,7 @@ const PatientForm = () => {
       const user = await createUser(userData);
 
       if (user && user.$id) {
-        router.push(`/patient/${user.$id}/register`);
+        router.push(`/patients/${user.$id}/register`);
       } else {
         console.error("User creation failed or $id is missing");
       }
