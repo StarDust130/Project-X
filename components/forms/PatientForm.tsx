@@ -3,14 +3,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Form } from "../ui/form";
 import CustomFormField from "./CustomFormField";
 import SubmitButton from "../elements/SubmitButton";
-import { useState } from "react";
 import { UserFormValidation } from "@/lib/validation";
-import { useRouter } from "next/navigation";
+import { createUser } from "@/lib/actions/patient.action";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -44,22 +45,26 @@ const PatientForm = () => {
     try {
       const userData = { name, email, phone };
 
-      //TODO: Add Own Database and Create Api to store user data
+      // TODO: Add Own Database and Create Api to store user data
+      const user = await createUser(userData);
 
-    //   const user = await createUser(userData);
-
-    //   if (user) router.push(`/patient/${user.$id}/register`);
-
+      if (user && user.$id) {
+        router.push(`/patient/${user.$id}/register`);
+      } else {
+        console.error("User creation failed or $id is missing");
+      }
     } catch (error) {
-      console.log(error);
+      console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
         <section className="mb-12 space-y-4">
           <h1 className="header text-2xl ">Hi there 👋</h1>
-
           <p className="text-dark-700">Schedule your first appointment </p>
         </section>
         <CustomFormField
